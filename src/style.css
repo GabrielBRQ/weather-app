@@ -55,7 +55,7 @@ input{
   flex: 1;
   border: 0;
   outline: none;
-  padding: 24px 20px;
+  padding: 12px 10px;
   font-size: 20px;
 }
 
@@ -66,8 +66,78 @@ img{
 button{
   border: 0;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   background-color: rgb(212, 205, 205);
   cursor: pointer;
+}
+
+.moon{
+  position: absolute;
+  top: 10vh;
+  right: 10vw;
+  bottom: 0;
+  width: 15vh;
+  height: 15vh;
+  border-radius: 50%;
+  background: white;
+  opacity: 0.9;
+  box-shadow: 0px 0px 40px 15px white;
+  z-index: 1;
+}
+
+.stars, .fog{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.stars{
+  background: #231c35 url(
+    http://www.script-tutorials.com/demos/360/images/stars.png)
+    repeat top center;
+  z-index: -1;
+  background-size: cover;
+}
+
+.fog{
+  background: #1f192b url(
+    https://www.imagensempng.com.br/wp-content/uploads/2021/05/07.png)
+    repeat top center;
+  opacity: 0.2;
+  z-index: -1;
+
+  -moz-animation: 
+    move-fog-back 200s linear infinite;
+  -ms-animation: 
+    move-fog-back 200s linear infinite;
+  -o-animation:
+    move-fog-back 200s linear infinite;
+  -webkit-animation: 
+    move-fog-back 200s linear infinite;
+
+  animation: move-fog-back 200s linear infinite;
+  background-size: cover;
+}
+
+.city-background {
+  background-image: url(/dist/city.png);
+  background-size: cover;
+  background-repeat: repeat;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80%;
+  height: 42%;
+  z-index: -1;
+}
+
+@keyframes move-fog-back {
+  from { background-position: 0 0; }
+  to { background-position: -8000px 3000px; }
 }
