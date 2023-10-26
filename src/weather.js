@@ -15,13 +15,15 @@ let country;
 
 async function getTemp(){
    const searchTerm = searchInput.value.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-   const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=c2ee4386538f4a81883124521232510&q=${searchTerm}&aqi=no`, { mode: 'cors' })
-   const data = await response.json();
-   temperatureCelsius = data.current.temp_c;
-   temperatureFahrenheit = data.current.temp_f;
-   city = data.location.name;
-   country = data.location.country;
-   setText();
+   if(searchTerm !== ''){
+      const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=c2ee4386538f4a81883124521232510&q=${searchTerm}&aqi=no`, { mode: 'cors' })
+      const data = await response.json();
+      temperatureCelsius = data.current.temp_c;
+      temperatureFahrenheit = data.current.temp_f;
+      city = data.location.name;
+      country = data.location.country;
+      setText();
+   }
 }
 
 function setText(){
