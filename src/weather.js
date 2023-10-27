@@ -50,13 +50,13 @@ function changeDayStyle(){
    const timePart = dayTime.split(':');
    const hour = parseInt(timePart[0]);
    moonLayout.style.opacity = '1';
-   if(hour < 16){
+   if(hour < 16 && hour > 5){
       moon.style.backgroundColor = "#f7f4e0"
       moon.style.right = '80vw';
       stars.style.opacity = '0';
       moon.style.opacity = "1";
       body.style.backgroundColor = '#7FC3FF';
-   }else if(hour < 19){
+   }else if(hour < 19 && hour > 5){
       moon.style.backgroundColor = "#f7f4e0"
       moon.style.right = `calc(50vw - ${moonWidth}px)`;
       moon.style.opacity = "0.5";
