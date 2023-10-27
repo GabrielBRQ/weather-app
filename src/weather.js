@@ -1,39 +1,30 @@
-import _, { get } from 'lodash';
+import _ from 'lodash';
 import searchIcon from './img/search.png'
 import './style.css';
 
-const celsiusTitle = document.querySelector(".celsius .title");
-const celsiusTemp = document.querySelector(".celsius .temp");
-const fahrenheitTitle = document.querySelector(".fahrenheit .title");
-const fahrenheitTemp = document.querySelector(".fahrenheit .temp");
-const searchInput = document.querySelector("input");
-const button = document.querySelector("button");
-const imgButton = document.querySelector("button img");
-const tempTitle = document.querySelector("p");
-
-let temperatureCelsius;
-let temperatureFahrenheit;
-let city;
-let country;
-let dayTime;
-
-async function getInfo(){
+async function getInfo(searchInput){
    const searchTerm = searchInput.value.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
    if(searchTerm !== ''){
       const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=c2ee4386538f4a81883124521232510&q=${searchTerm}&aqi=no`, { mode: 'cors' })
       const data = await response.json();
-      temperatureCelsius = data.current.temp_c;
-      temperatureFahrenheit = data.current.temp_f;
-      city = data.location.name;
-      country = data.location.country;
+      let temperatureCelsius = data.current.temp_c;
+      let temperatureFahrenheit = data.current.temp_f;
+      let city = data.location.name;
+      let country = data.location.country;
       const time = data.location.localtime.split(' ');
-      dayTime = time[1]
-      changeDayStyle();
-      setText();
+      let dayTime = time[1]
+      changeDayStyle(dayTime);
+      setText(temperatureCelsius, temperatureFahrenheit, city, country);
    }
 }
 
-function setText(){
+function setText(temperatureCelsius, temperatureFahrenheit, city, country){
+   const celsiusTitle = document.querySelector(".celsius .title");
+   const celsiusTemp = document.querySelector(".celsius .temp");
+   const fahrenheitTitle = document.querySelector(".fahrenheit .title");
+   const fahrenheitTemp = document.querySelector(".fahrenheit .temp");
+   const tempTitle = document.querySelector("p");
+
    celsiusTitle.textContent = 'Celsius (°C)'
    celsiusTemp.textContent = temperatureCelsius;
    fahrenheitTitle.textContent = 'Fahrenheit (°C)';
@@ -41,7 +32,7 @@ function setText(){
    tempTitle.textContent = `Temperature in ${city}, ${country}`;
 }
 
-function changeDayStyle(){
+function changeDayStyle(dayTime){
    const moonLayout = document.querySelector(".moon-layout")
    const body = document.body;
    const moon = document.querySelector(".moon");
@@ -68,15 +59,25 @@ function changeDayStyle(){
       moon.style.opacity = "1";
       stars.style.opacity = '1';
    }
-   console.log(hour);
 }
 
-button.addEventListener('click', getInfo);
-   searchInput.addEventListener('keyup', function(event) {
-      if (event.key === 'Enter') {
-         getInfo();
-      }
-   }
-);
+function buttonListener(){
+   const button = document.querySelector("button");
+   const searchInput = document.querySelector("input");
 
-imgButton.src = searchIcon
+   button.addEventListener('click', getInfo(searchInput));
+      searchInput.addEventListener('keyup', function(event) {
+         if (event.key === 'Enter') {
+            getInfo(searchInput);
+         }
+      }
+   );
+}
+
+function addSearchImg(){
+   const imgButton = document.querySelector("button img");
+   imgButton.src = searchIcon;
+}
+
+addSearchImg();
+buttonListener();
