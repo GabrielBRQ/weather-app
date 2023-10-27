@@ -7,6 +7,7 @@ const fahrenheitTitle = document.querySelector(".fahrenheit .title");
 const fahrenheitTemp = document.querySelector(".fahrenheit .temp");
 const searchInput = document.querySelector('input');
 const button = document.querySelector('button');
+const imgButton = document.querySelector('button img');
 const tempTitle = document.querySelector("p");
 let temperatureCelsius;
 let temperatureFahrenheit;
@@ -41,3 +42,5 @@ button.addEventListener('click', getTemp);
       }
    }
 );
+
+imgButton.src = "/dist/297d05ac11b74e171a85.png";
