@@ -155,3 +155,29 @@ button{
   from { background-position: 0 0; }
   to { background-position: -8000px 3000px; }
 }
+
+@media only screen and (max-width: 920px)  {
+  header{
+    font-size: 15vw;
+    text-shadow: 
+      -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+  }
+
+  .temp-title p {
+    font-size: 7.5vw;
+    z-index: 2;
+  }
+
+  .search-div{
+    width: 85%;
+    max-width: 500px;
+  }
+
+  input{
+    padding-right: 0;
+    width: 10px;
+  }
+}
