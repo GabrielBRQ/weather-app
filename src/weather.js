@@ -7,13 +7,13 @@ function buttonListener(){
    const button = document.querySelector("button");
    const searchInput = document.querySelector("input");
 
-   button.addEventListener('click', getInfo(searchInput));
-      searchInput.addEventListener('keyup', function(event) {
-         if (event.key === 'Enter') {
-            getInfo(searchInput);
-         }
+   button.addEventListener('click', () => getInfo(searchInput));
+   
+   searchInput.addEventListener('keyup', function(event) {
+      if (event.key === 'Enter') {
+         getInfo(searchInput);
       }
-   );
+   });
 }
 
 function addSearchImg(){
